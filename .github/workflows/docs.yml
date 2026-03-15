@@ -6,7 +6,7 @@
 #   - No separate gh-pages branch to manage.
 #   - GitHub Pages configuration is a single setting: serve from /docs on master.
 #   - The generated HTML is visible directly in the repository.
-#   - Works without any CI at all: run `mkdocs build` locally and commit docs/.
+#   - Works without any CI at all: run the steps below locally and commit docs/.
 
 name: Docs
 
@@ -26,6 +26,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Download ROBOT
+        run: |
+          curl -L https://github.com/ontodev/robot/releases/download/v1.9.5/robot.jar \
+               -o /tmp/robot.jar
+
+      - name: Generate ontology term documentation with ROBOT
+        run: |
+          python3 src/scripts/generate_ontology_docs.py --robot-jar /tmp/robot.jar
+
       - name: Install MkDocs
         run: pip install mkdocs
 
@@ -36,6 +51,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/
+          git add docs/ docs_src/ontology-terms.md
           git diff --cached --quiet || git commit -m "docs: rebuild documentation [skip ci]"
           git push

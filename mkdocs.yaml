@@ -14,3 +14,4 @@ nav:
           - Continuous Integration: odk-workflows/ContinuousIntegration.md
   - Reference:
       - Your ODK Repository Overview: odk-workflows/RepositoryFileStructure.md
+      - Ontology Terms: ontology-terms.md
