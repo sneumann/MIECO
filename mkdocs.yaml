@@ -1,0 +1,17 @@
+site_name: Metabolite Identification Evidence Code Ontology (MIECO)
+docs_dir: docs_src
+site_dir: docs
+theme: readthedocs
+nav:
+  - Getting started: index.md
+  - How-to guides:
+      - Standard ODK workflows:
+          - Overview: odk-workflows/index.md
+          - Editors Workflow: odk-workflows/EditorsWorkflow.md
+          - Release Workflow: odk-workflows/ReleaseWorkflow.md
+          - Manage your ODK Repository: odk-workflows/RepoManagement.md
+          - Setting up Docker for ODK: odk-workflows/SettingUpDockerForODK.md
+          - Continuous Integration: odk-workflows/ContinuousIntegration.md
+  - Reference:
+      - Your ODK Repository Overview: odk-workflows/RepositoryFileStructure.md
+      - Ontology Terms: ontology-terms.md

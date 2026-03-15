@@ -1,0 +1,20 @@
+id: mieco
+title: "Metabolite Identification Evidence Code Ontology (MIECO)"
+github_org: sneumann
+git_main_branch: master
+repo: MIECO
+report_fail_on: none
+edit_format: owl
+uribase: http://metabolomicssociety.org/ontologies
+export_formats:
+  - owl
+release_artefacts:
+  - base
+primary_release: base
+documentation:
+  documentation_system: mkdocs
+robot_report:
+  fail_on: none
+  use_labels: true
+  report_on:
+    - edit

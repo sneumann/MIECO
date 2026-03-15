@@ -1,0 +1,23 @@
+# ODK build artifacts
+src/ontology/tmp/
+src/ontology/mirror/
+src/ontology/reports/
+src/ontology/imports/
+src/ontology/target/
+src/ontology/test.owl
+
+# Generated release files (not tracked in repo for development)
+# Uncomment if you want to exclude release files:
+# mieco.owl
+# mieco-base.owl
+
+# MkDocs default output directory (we use docs/ instead, which IS tracked)
+site/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# OS
+.DS_Store

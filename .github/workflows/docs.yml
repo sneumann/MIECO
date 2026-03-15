@@ -1,0 +1,56 @@
+# Simpler docs workflow: build MkDocs and commit HTML to docs/ on the main branch.
+#
+# Why this approach instead of mhausenblas/mkdocs-deploy-gh-pages:
+#   - No third-party action dependency (mhausenblas/mkdocs-deploy-gh-pages is
+#     pinned to @master with no version tag, which is a security/reliability risk).
+#   - No separate gh-pages branch to manage.
+#   - GitHub Pages configuration is a single setting: serve from /docs on master.
+#   - The generated HTML is visible directly in the repository.
+#   - Works without any CI at all: run the steps below locally and commit docs/.
+
+name: Docs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build and commit docs
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Download ROBOT
+        run: |
+          curl -L https://github.com/ontodev/robot/releases/download/v1.9.5/robot.jar \
+               -o /tmp/robot.jar
+
+      - name: Generate ontology term documentation with ROBOT
+        run: |
+          python3 src/scripts/generate_ontology_docs.py --robot-jar /tmp/robot.jar
+
+      - name: Install MkDocs
+        run: pip install mkdocs
+
+      - name: Build documentation
+        run: mkdocs build -f mkdocs.yaml
+
+      - name: Commit updated docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/ docs_src/ontology-terms.md
+          git diff --cached --quiet || git commit -m "docs: rebuild documentation [skip ci]"
+          git push

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Setting up Docker for ODK - Metabolite Identification Evidence Code Ontology (MIECO)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Setting up Docker for ODK";
+        var mkdocs_page_input_path = "odk-workflows/SettingUpDockerForODK.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Metabolite Identification Evidence Code Ontology (MIECO)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">How-to guides</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Standard ODK workflows</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../EditorsWorkflow/">Editors Workflow</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../ReleaseWorkflow/">Release Workflow</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../RepoManagement/">Manage your ODK Repository</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Setting up Docker for ODK</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pulling-the-odk-image">Pulling the ODK Image</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-runsh">Using run.sh</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../ContinuousIntegration/">Continuous Integration</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../RepositoryFileStructure/">Your ODK Repository Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ontology-terms/">Ontology Terms</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Metabolite Identification Evidence Code Ontology (MIECO)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">How-to guides</li>
+          <li class="breadcrumb-item">Standard ODK workflows</li>
+      <li class="breadcrumb-item active">Setting up Docker for ODK</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="setting-up-docker-for-odk">Setting up Docker for ODK</h1>
+<p>This document describes how to set up Docker for use with the ODK.</p>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>Install Docker Desktop for your platform:</li>
+<li><a href="https://docs.docker.com/desktop/install/mac-install/">Mac</a></li>
+<li><a href="https://docs.docker.com/desktop/install/windows-install/">Windows</a></li>
+<li>
+<p><a href="https://docs.docker.com/desktop/install/linux-install/">Linux</a></p>
+</li>
+<li>
+<p>Verify Docker is working:</p>
+</li>
+</ol>
+<pre><code class="language-bash">docker run hello-world
+</code></pre>
+<h2 id="pulling-the-odk-image">Pulling the ODK Image</h2>
+<p>Pull the ODK Docker image:</p>
+<pre><code class="language-bash">docker pull obolibrary/odkfull:v1.5.4
+</code></pre>
+<h2 id="using-runsh">Using run.sh</h2>
+<p>The <code>run.sh</code> script in <code>src/ontology/</code> wraps Docker commands for you:</p>
+<pre><code class="language-bash">cd src/ontology
+./run.sh make test
+</code></pre>
+<p>For more information, see: https://oboacademy.github.io/obook/howto/odk-setup/</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../RepoManagement/" class="btn btn-neutral float-left" title="Manage your ODK Repository"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ContinuousIntegration/" class="btn btn-neutral float-right" title="Continuous Integration">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../RepoManagement/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ContinuousIntegration/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
