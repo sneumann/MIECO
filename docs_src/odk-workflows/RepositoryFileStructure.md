@@ -9,11 +9,12 @@ MIECO/
 ├── .github/
 │   └── workflows/
 │       ├── qc.yml          # CI quality control workflow
-│       └── docs.yml        # Documentation deployment workflow
-├── docs/                   # Documentation source files (MkDocs)
+│       └── docs.yml        # Documentation build & commit workflow
+├── docs/                   # Generated HTML documentation (served by GitHub Pages)
+├── docs_src/               # Documentation source files (Markdown, edit these)
 │   ├── index.md            # Documentation home page
 │   └── odk-workflows/      # ODK workflow documentation
-├── mkdocs.yaml             # MkDocs configuration
+├── mkdocs.yaml             # MkDocs configuration (docs_dir: docs_src, site_dir: docs)
 ├── ontology/               # Legacy ontology files (backward compatibility)
 │   ├── MIECO.owl           # Original OWL file
 │   └── MIECO.obo           # OBO format version

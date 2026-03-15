@@ -11,7 +11,7 @@ src/ontology/test.owl
 # mieco.owl
 # mieco-base.owl
 
-# MkDocs documentation build
+# MkDocs default output directory (we use docs/ instead, which IS tracked)
 site/
 
 # Python

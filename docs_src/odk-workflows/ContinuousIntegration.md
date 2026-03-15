@@ -27,7 +27,20 @@ The `IMP=false`, `PAT=false`, and `MIR=false` flags skip import refreshing, patt
 
 ### Docs Workflow (`.github/workflows/docs.yml`)
 
-Automatically builds and deploys documentation to GitHub Pages on every push to master.
+Automatically rebuilds the MkDocs site and commits the generated HTML to `docs/`
+on every push to master. GitHub Pages is then configured to serve from that
+`docs/` folder — no separate `gh-pages` branch required.
+
+This is intentionally simpler than using a third-party action such as
+`mhausenblas/mkdocs-deploy-gh-pages` because:
+
+- It has no external action dependency (the `mhausenblas` action is unpinned and
+  could change or disappear).
+- There is no `gh-pages` branch to manage — everything lives on `master`.
+- GitHub Pages setup is a single repository setting: *serve from `/docs` on master*.
+- The generated HTML is visible directly in the repository.
+- Documentation can also be updated entirely without CI: run `mkdocs build`
+  locally and commit the `docs/` output.
 
 ## Viewing CI Results
 

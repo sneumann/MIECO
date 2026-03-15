@@ -1,4 +1,6 @@
 site_name: Metabolite Identification Evidence Code Ontology (MIECO)
+docs_dir: docs_src
+site_dir: docs
 theme: readthedocs
 nav:
   - Getting started: index.md

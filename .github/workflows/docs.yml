@@ -1,28 +1,41 @@
-# Basic ODK docs workflow
+# Simpler docs workflow: build MkDocs and commit HTML to docs/ on the main branch.
+#
+# Why this approach instead of mhausenblas/mkdocs-deploy-gh-pages:
+#   - No third-party action dependency (mhausenblas/mkdocs-deploy-gh-pages is
+#     pinned to @master with no version tag, which is a security/reliability risk).
+#   - No separate gh-pages branch to manage.
+#   - GitHub Pages configuration is a single setting: serve from /docs on master.
+#   - The generated HTML is visible directly in the repository.
+#   - Works without any CI at all: run `mkdocs build` locally and commit docs/.
+
 name: Docs
 
-# Controls when the action will run. 
 on:
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   push:
     branches:
       - master
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    name: Deploy docs
+    name: Build and commit docs
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Deploy docs
-        uses: mhausenblas/mkdocs-deploy-gh-pages@master
-        # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CONFIG_FILE: mkdocs.yaml
+      - name: Install MkDocs
+        run: pip install mkdocs
+
+      - name: Build documentation
+        run: mkdocs build -f mkdocs.yaml
+
+      - name: Commit updated docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git diff --cached --quiet || git commit -m "docs: rebuild documentation [skip ci]"
+          git push

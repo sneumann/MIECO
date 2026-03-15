@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Continuous Integration - Metabolite Identification Evidence Code Ontology (MIECO)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Continuous Integration";
+        var mkdocs_page_input_path = "odk-workflows/ContinuousIntegration.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Metabolite Identification Evidence Code Ontology (MIECO)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">How-to guides</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Standard ODK workflows</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../EditorsWorkflow/">Editors Workflow</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../ReleaseWorkflow/">Release Workflow</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../RepoManagement/">Manage your ODK Repository</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../SettingUpDockerForODK/">Setting up Docker for ODK</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Continuous Integration</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#workflows">Workflows</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#qc-workflow-githubworkflowsqcyml">QC Workflow (.github/workflows/qc.yml)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#docs-workflow-githubworkflowsdocsyml">Docs Workflow (.github/workflows/docs.yml)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#viewing-ci-results">Viewing CI Results</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../RepositoryFileStructure/">Your ODK Repository Overview</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Metabolite Identification Evidence Code Ontology (MIECO)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">How-to guides</li>
+          <li class="breadcrumb-item">Standard ODK workflows</li>
+      <li class="breadcrumb-item active">Continuous Integration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="continuous-integration">Continuous Integration</h1>
+<p>This document describes the CI pipeline for MIECO.</p>
+<h2 id="overview">Overview</h2>
+<p>MIECO uses GitHub Actions for continuous integration. The CI pipeline runs automatically on:
+- Every push to the <code>master</code> branch
+- Every pull request targeting the <code>master</code> branch</p>
+<h2 id="workflows">Workflows</h2>
+<h3 id="qc-workflow-githubworkflowsqcyml">QC Workflow (<code>.github/workflows/qc.yml</code>)</h3>
+<p>Runs ontology quality control checks using the ODK Docker container:</p>
+<ol>
+<li><strong>Reasoning test</strong>: Validates the ontology is consistent using the ELK reasoner</li>
+<li><strong>SPARQL validation</strong>: Runs SPARQL queries to check for common errors</li>
+<li><strong>ROBOT report</strong>: Generates a quality report</li>
+</ol>
+<p>The CI runs with:</p>
+<pre><code>make test IMP=false PAT=false MIR=false
+</code></pre>
+<p>The <code>IMP=false</code>, <code>PAT=false</code>, and <code>MIR=false</code> flags skip import refreshing, pattern processing, and mirror refreshing for faster CI runs.</p>
+<h3 id="docs-workflow-githubworkflowsdocsyml">Docs Workflow (<code>.github/workflows/docs.yml</code>)</h3>
+<p>Automatically rebuilds the MkDocs site and commits the generated HTML to <code>docs/</code>
+on every push to master. GitHub Pages is then configured to serve from that
+<code>docs/</code> folder — no separate <code>gh-pages</code> branch required.</p>
+<p>This is intentionally simpler than using a third-party action such as
+<code>mhausenblas/mkdocs-deploy-gh-pages</code> because:</p>
+<ul>
+<li>It has no external action dependency (the <code>mhausenblas</code> action is unpinned and
+  could change or disappear).</li>
+<li>There is no <code>gh-pages</code> branch to manage — everything lives on <code>master</code>.</li>
+<li>GitHub Pages setup is a single repository setting: <em>serve from <code>/docs</code> on master</em>.</li>
+<li>The generated HTML is visible directly in the repository.</li>
+<li>Documentation can also be updated entirely without CI: run <code>mkdocs build</code>
+  locally and commit the <code>docs/</code> output.</li>
+</ul>
+<h2 id="viewing-ci-results">Viewing CI Results</h2>
+<p>Check the <a href="https://github.com/sneumann/MIECO/actions">Actions tab</a> to see CI results.</p>
+<p>For more information, see: https://oboacademy.github.io/obook/howto/odk-workflows/</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../SettingUpDockerForODK/" class="btn btn-neutral float-left" title="Setting up Docker for ODK"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../RepositoryFileStructure/" class="btn btn-neutral float-right" title="Your ODK Repository Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../SettingUpDockerForODK/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../RepositoryFileStructure/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

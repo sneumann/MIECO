@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Editors Workflow - Metabolite Identification Evidence Code Ontology (MIECO)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Editors Workflow";
+        var mkdocs_page_input_path = "odk-workflows/EditorsWorkflow.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Metabolite Identification Evidence Code Ontology (MIECO)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">How-to guides</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Standard ODK workflows</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../">Overview</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Editors Workflow</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#editing-the-ontology">Editing the Ontology</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#running-quality-checks">Running Quality Checks</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#committing-changes">Committing Changes</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../ReleaseWorkflow/">Release Workflow</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../RepoManagement/">Manage your ODK Repository</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../SettingUpDockerForODK/">Setting up Docker for ODK</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../ContinuousIntegration/">Continuous Integration</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../RepositoryFileStructure/">Your ODK Repository Overview</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Metabolite Identification Evidence Code Ontology (MIECO)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">How-to guides</li>
+          <li class="breadcrumb-item">Standard ODK workflows</li>
+      <li class="breadcrumb-item active">Editors Workflow</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="editors-workflow">Editors Workflow</h1>
+<p>This document describes how to edit the MIECO ontology.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+<li>Install <a href="https://www.docker.com/get-docker">Docker</a></li>
+<li>Clone the repository: <code>git clone https://github.com/sneumann/MIECO</code></li>
+<li>Open a terminal and navigate to <code>src/ontology</code></li>
+</ol>
+<h2 id="editing-the-ontology">Editing the Ontology</h2>
+<p>The source file to edit is <code>src/ontology/mieco-edit.owl</code>.</p>
+<p>You can use <a href="https://protege.stanford.edu/">Protégé</a> to edit the ontology.</p>
+<h2 id="running-quality-checks">Running Quality Checks</h2>
+<p>After editing, run the quality checks locally using the ODK wrapper:</p>
+<pre><code class="language-bash">cd src/ontology
+./run.sh make test IMP=false PAT=false MIR=false
+</code></pre>
+<h2 id="committing-changes">Committing Changes</h2>
+<p>After verifying your changes pass quality checks:</p>
+<pre><code class="language-bash">git add src/ontology/mieco-edit.owl
+git commit -m &quot;Brief description of change&quot;
+git push origin master
+</code></pre>
+<p>The CI pipeline will automatically run quality checks on your commits.</p>
+<p>For more information, see the <a href="https://oboacademy.github.io/obook/howto/odk-workflows/">ODK documentation</a>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ReleaseWorkflow/" class="btn btn-neutral float-right" title="Release Workflow">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ReleaseWorkflow/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
