@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri name="http://purl.obolibrary.org/obo/eco.owl" uri="../../ontology/external/eco.owl"/>
+    <uri name="http://purl.obolibrary.org/obo/obi/obi_core.owl" uri="../../ontology/external/obi_core.owl"/>
+    <uri name="http://purl.obolibrary.org/obo/obi.owl" uri="../../ontology/external/obi_core.owl"/>
+    <uri name="http://purl.obolibrary.org/obo/iao/ontology-metadata.owl" uri="../../ontology/external/ontology-metadata.owl"/>
+    <uri name="http://xmlns.com/foaf/0.1/index.rdf" uri="../../ontology/external/index.rdf"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1467202307275" name="http://metabolomicssociety.org/ontologies/MIECO" uri="mieco-edit.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1467202307275" name="http://metabolomicssociety.org/ontologies/MIECO.owl" uri="mieco-edit.owl"/>
+    </group>
+</catalog>
